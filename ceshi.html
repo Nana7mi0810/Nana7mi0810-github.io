@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>suki</title>
+<link rel="stylesheet" href="css/cs1.css">
+</head>
+<body>
+  <div class="tip">点击屏幕开始</div>
+  <p class="colorful-text">制作者:d   y   h</p>
+
+  <script>
+    // 音效
+    const clickSound = new Audio("click.mp3");  // 点击音效
+    const bgMusic = new Audio("harudorobo banzou.mp3");         // 背景音乐
+    bgMusic.loop = true; // 循环播放
+
+    const messages = [
+      "加油",
+      "辛苦了",
+      "你好",
+      "再见",
+      "strawberry",
+      "watermelon",
+      "orange",
+      "appeal"
+    ];
+
+    const bgColors = ["#C3C7CE", "#E2D8DB", "#E5DCD2"];
+
+    const POPUP_COUNT = 800;
+    const GENERATE_INTERVAL = 80;
+    const POPUP_DURATION_MIN = 5000;
+    const POPUP_DURATION_MAX = 10000;
+
+    const BG_BEFORE = "before.jpg";
+    const BG_AFTER = "background.jpg";
+
+    let started = false;
+
+    function spawnOne() {
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      const bg = bgColors[Math.floor(Math.random() * bgColors.length)];
+      const fontSize = Math.floor(Math.random() * 5) + 12;
+
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const x = Math.random() * (w - 130);
+      const y = Math.random() * (h - 50);
+
+      const div = document.createElement("div");
+      div.className = "popup";
+      div.style.left = x + "px";
+      div.style.top = y + "px";
+      div.style.backgroundColor = bg;
+      div.style.fontSize = fontSize + "px";
+      div.innerText = msg;
+
+      document.body.appendChild(div);
+
+      const delay = Math.random() * (POPUP_DURATION_MAX - POPUP_DURATION_MIN) + POPUP_DURATION_MIN;
+      setTimeout(() => div.remove(), delay);
+    }
+
+    document.body.addEventListener("click", async () => {
+      if (started) return;
+      started = true;
+
+      document.querySelector(".tip").remove();
+      document.body.style.background = `url("${BG_AFTER}") center/cover no-repeat fixed`;
+
+      // 播放点击音效
+      clickSound.play().catch(() => {});
+      // 自动播放背景音乐
+      bgMusic.play().catch(() => {});
+
+      for (let i = 0; i < POPUP_COUNT; i++) {
+        setTimeout(spawnOne, i * GENERATE_INTERVAL);
+      }
+    });
+  </script>
+</body>
+</html>
