@@ -1,0 +1,67 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+      /* 初始背景图 */
+      background: url("before.jpg") center/cover no-repeat fixed;
+      transition: background 0.8s ease;
+    }
+
+    .tip {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size:100px;
+      font-family: "Microsoft YaHei", sans-serif;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 8px;
+      user-select: none;
+      z-index: 999;
+    }
+
+    .popup {
+      position: absolute;
+      width: 130px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "SimHei", sans-serif;
+      border-radius: 4px;
+      padding: 4px;
+      text-align: center;
+      word-break: break-all;
+      opacity: 0.9;
+      animation: fadeOut 0.5s forwards;
+      animation-delay: 4.5s;
+    }
+
+    .colorful-text {
+             font-size: 24px;
+             font-weight: bold;
+             /* 渐变文字效果 */
+             background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+             background-size: 400% 400%;
+             -webkit-background-clip: text;
+             background-clip: text;
+             color: transparent;
+             /* 动画：渐变流动 */
+             animation: colorFlow 4s linear infinite;
+         }
+         /* 定义动画关键帧 */
+         @keyframes colorFlow {
+             0% { background-position: 0% 50%; }
+             100% { background-position: 100% 50%; }
+         }
+  @keyframes fadeOut {
+      to { opacity: 0; }}
